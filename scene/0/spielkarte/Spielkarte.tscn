@@ -1,0 +1,42 @@
+[gd_scene load_steps=4 format=3 uid="uid://cy8h0ecqcsyln"]
+
+[ext_resource type="Script" path="res://scene/0/spielkarte/Spielkarte.gd" id="1_qhi4o"]
+[ext_resource type="Texture2D" uid="uid://cerl1x0gcxbfl" path="res://asset/png/karte/front.png" id="1_t2n5s"]
+[ext_resource type="FontFile" uid="uid://b1ljoth5axgt3" path="res://asset/font/ALBA____.TTF" id="2_qvg56"]
+
+[node name="MarginContainer" type="MarginContainer"]
+custom_minimum_size = Vector2(60, 90)
+layout_direction = 1
+offset_right = 60.0
+offset_bottom = 90.0
+script = ExtResource("1_qhi4o")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_t2n5s")
+centered = false
+flip_h = true
+
+[node name="Labels" type="MarginContainer" parent="."]
+custom_minimum_size = Vector2(30, 90)
+layout_direction = 1
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="Kind" type="Label" parent="Labels"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_fonts/font = ExtResource("2_qvg56")
+theme_override_font_sizes/font_size = 30
+text = "A
+"
+
+[node name="Rank" type="Label" parent="Labels"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_fonts/font = ExtResource("2_qvg56")
+theme_override_font_sizes/font_size = 30
+text = "3
+"
+vertical_alignment = 2

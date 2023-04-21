@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://btl6s150xiofc"]
+
+[node name="Zugang" type="Line2D"]
+width = 1.0
+default_color = Color(0.00392157, 0.00392157, 0.00392157, 1)

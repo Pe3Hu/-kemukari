@@ -1,0 +1,10 @@
+res://scene/game/Game.tscn
+res://scene/game/Game.gd
+res://script/Global.gd
+res://script/Classes_1.gd
+res://script/Classes_0.gd
+res://scene/0/kasino/Kasino.tscn
+res://scene/0/spielkarte/Spielkarte.tscn
+res://scene/0/spieltisch/Spieltisch.tscn
+res://scene/0/spielkarte/Spielkarte.gd
+res://scene/0/spieltisch/Spieltisch.gd

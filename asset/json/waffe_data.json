@@ -1,0 +1,83 @@
+[
+ {
+  "Type": "Knuckles",
+  "Base damage bottom": 80,
+  "Base damage top": 110,
+  "Spread of the bottom reduction": -10,
+  "Spread of the bottom increase": 10,
+  "Spread of the top reduction": -10,
+  "Spread of the top increase": 10
+ },
+ {
+  "Type": "Hammer",
+  "Base damage bottom": 70,
+  "Base damage top": 140,
+  "Spread of the bottom reduction": -30,
+  "Spread of the bottom increase": 10,
+  "Spread of the top reduction": -10,
+  "Spread of the top increase": 30
+ },
+ {
+  "Type": "Spear",
+  "Base damage bottom": 80,
+  "Base damage top": 150,
+  "Spread of the bottom reduction": 10,
+  "Spread of the bottom increase": 20,
+  "Spread of the top reduction": -20,
+  "Spread of the top increase": 10
+ },
+ {
+  "Type": "Blades",
+  "Base damage bottom": 85,
+  "Base damage top": 125,
+  "Spread of the bottom reduction": -15,
+  "Spread of the bottom increase": 10,
+  "Spread of the top reduction": -15,
+  "Spread of the top increase": 30
+ },
+ {
+  "Type": "Needles",
+  "Base damage bottom": 85,
+  "Base damage top": 105,
+  "Spread of the bottom reduction": -5,
+  "Spread of the bottom increase": 10,
+  "Spread of the top reduction": -10,
+  "Spread of the top increase": 5
+ },
+ {
+  "Type": "Kusarigama",
+  "Base damage bottom": 70,
+  "Base damage top": 130,
+  "Spread of the bottom reduction": -23,
+  "Spread of the bottom increase": 12,
+  "Spread of the top reduction": -12,
+  "Spread of the top increase": 23
+ },
+ {
+  "Type": "Spheres",
+  "Base damage bottom": 70,
+  "Base damage top": 130,
+  "Spread of the bottom reduction": -12,
+  "Spread of the bottom increase": 13,
+  "Spread of the top reduction": -12,
+  "Spread of the top increase": 13
+ },
+ {
+  "Type": "Grimoire",
+  "Base damage bottom": 80,
+  "Base damage top": 90,
+  "Spread of the bottom reduction": -5,
+  "Spread of the bottom increase": 5,
+  "Spread of the top reduction": -5,
+  "Spread of the top increase": 5
+ },
+ {
+  "Type": "Bow",
+  "Base damage bottom": 85,
+  "Base damage top": 145,
+  "Spread of the bottom reduction": -15,
+  "Spread of the bottom increase": 25,
+  "Spread of the top reduction": -20,
+  "Spread of the top increase": 20
+ }
+]
