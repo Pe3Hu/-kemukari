@@ -1,0 +1,97 @@
+[gd_scene load_steps=8 format=3 uid="uid://byv5qs4l52iv2"]
+
+[ext_resource type="Texture2D" uid="uid://0eg48sxacplr" path="res://asset/png/sektor/empty.png" id="1_mo5ae"]
+[ext_resource type="Script" path="res://scene/2/sektor/Sektor.gd" id="1_nfkn5"]
+[ext_resource type="FontFile" uid="uid://brthmdy0bvgqo" path="res://asset/font/metal lord ot.otf" id="2_d03ba"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3ha3t"]
+bg_color = Color(0.796078, 0, 0.266667, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iqei0"]
+bg_color = Color(0, 0.64, 0, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3qfcq"]
+bg_color = Color(1, 1, 0.6, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tgxis"]
+bg_color = Color(0.75, 0.75, 0, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
+
+[node name="Sektor" type="MarginContainer"]
+offset_right = 60.0
+offset_bottom = 60.0
+script = ExtResource("1_nfkn5")
+
+[node name="BG" type="TextureRect" parent="."]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("1_mo5ae")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 1
+
+[node name="Health" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Bar" type="ProgressBar" parent="VBoxContainer/Health"]
+custom_minimum_size = Vector2(0, 16)
+layout_direction = 1
+layout_mode = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_3ha3t")
+theme_override_styles/fill = SubResource("StyleBoxFlat_iqei0")
+step = 1.0
+value = 90.0
+show_percentage = false
+
+[node name="Label" type="Label" parent="VBoxContainer/Health"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = 0
+theme_override_fonts/font = ExtResource("2_d03ba")
+theme_override_font_sizes/font_size = 12
+text = "90/100"
+horizontal_alignment = 1
+
+[node name="Mucus" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Bar" type="ProgressBar" parent="VBoxContainer/Mucus"]
+custom_minimum_size = Vector2(0, 16)
+layout_direction = 1
+layout_mode = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_3qfcq")
+theme_override_styles/fill = SubResource("StyleBoxFlat_tgxis")
+max_value = 10.0
+step = 1.0
+value = 9.0
+show_percentage = false
+
+[node name="Label" type="Label" parent="VBoxContainer/Mucus"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = 0
+theme_override_fonts/font = ExtResource("2_d03ba")
+theme_override_font_sizes/font_size = 12
+text = "9/10"
+horizontal_alignment = 1

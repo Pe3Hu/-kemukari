@@ -144,7 +144,6 @@ class Spieltisch:
 			input.spieltisch = self
 			var spieler = Classes_0.Spieler.new(input)
 			arr.spieler.append(spieler)
-		
 
 	func init_scene() -> void:
 		scene.myself = Global.scene.spieltisch.instantiate()

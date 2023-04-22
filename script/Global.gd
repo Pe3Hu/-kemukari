@@ -72,6 +72,27 @@ func init_dict() -> void:
 		3: 2,
 		4: 1
 	}
+	init_nachzucht()
+
+
+func init_nachzucht() -> void:
+	dict.nachzucht = {}
+	var path = "res://asset/json/nachzucht_data.json"
+	var array = load_data(path)
+	dict.nachzucht.parameter = {}
+	
+	
+	for nachzucht in array:
+		var data = {}
+
+		for key in nachzucht.keys():
+			if key != "Parameter":
+				data[key] = nachzucht[key]
+		
+		dict.nachzucht.parameter[nachzucht["Parameter"]] = data
+	
+	
+	print(dict.nachzucht.parameter)
 
 
 func init_arr() -> void:
@@ -107,6 +128,8 @@ func init_scene() -> void:
 	scene.schlitz = load("res://scene/1/schlitz/Schlitz.tscn")
 	scene.zugang = load("res://scene/1/zugang/Zugang.tscn")
 	scene.leinwand = load("res://scene/1/leinwand/Leinwand.tscn")
+	scene.sektor = load("res://scene/2/sektor/Sektor.tscn")
+	scene.schlachtfeld = load("res://scene/2/schlachtfeld/Schlachtfeld.tscn")
 
 
 func _ready() -> void:
