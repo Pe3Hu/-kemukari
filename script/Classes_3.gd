@@ -1,6 +1,16 @@
 extends Node
 
 
+
+#Родословная
+class Ahnentafel:
+	var obj = {}
+
+
+	func _init() -> void:
+		pass
+
+
 #Потомство
 class Nachzucht:
 	var obj = {}

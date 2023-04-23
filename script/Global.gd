@@ -72,7 +72,27 @@ func init_dict() -> void:
 		3: 2,
 		4: 1
 	}
+	
+	init_ahnentafel()
 	init_nachzucht()
+
+
+func init_ahnentafel() -> void:
+	dict.ahnentafel = {}
+	var path = "res://asset/json/ahnentafel_data.json"
+	var array = load_data(path)
+	dict.ahnentafel.kind = {}
+	
+	for ahnentafel in array:
+		var data = {}
+
+		for key in ahnentafel.keys():
+			if key != "Kind":
+				data[key] = ahnentafel[key]
+		
+		dict.ahnentafel.kind[ahnentafel["Kind"]] = data
+	
+	print(dict.ahnentafel.kind)
 
 
 func init_nachzucht() -> void:
@@ -80,7 +100,6 @@ func init_nachzucht() -> void:
 	var path = "res://asset/json/nachzucht_data.json"
 	var array = load_data(path)
 	dict.nachzucht.parameter = {}
-	
 	
 	for nachzucht in array:
 		var data = {}
@@ -90,9 +109,6 @@ func init_nachzucht() -> void:
 				data[key] = nachzucht[key]
 		
 		dict.nachzucht.parameter[nachzucht["Parameter"]] = data
-	
-	
-	print(dict.nachzucht.parameter)
 
 
 func init_arr() -> void:
