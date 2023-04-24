@@ -17,7 +17,7 @@ var mouse_pressed = false
 func init_num() -> void:
 	num.index = {}
 	num.index.knopf = 0
-	num.index.fehler = 0
+	num.index.drillinge = 0
 	
 	num.leinwand = {}
 	num.leinwand.n = 6
@@ -75,6 +75,7 @@ func init_dict() -> void:
 	
 	init_ahnentafel()
 	init_nachzucht()
+	set_drillinge()
 
 
 func init_ahnentafel() -> void:
@@ -91,8 +92,6 @@ func init_ahnentafel() -> void:
 				data[key] = ahnentafel[key]
 		
 		dict.ahnentafel.kind[ahnentafel["Kind"]] = data
-	
-	print(dict.ahnentafel.kind)
 
 
 func init_nachzucht() -> void:
@@ -109,6 +108,94 @@ func init_nachzucht() -> void:
 				data[key] = nachzucht[key]
 		
 		dict.nachzucht.parameter[nachzucht["Parameter"]] = data
+
+
+func set_drillinge() -> void:
+	dict.drillinge = {}
+	dict.drillinge.tag = ["Offense","Retention","Mobility","Twin","Frontline","Backline","Cheap","Expensive"]
+	dict.drillinge.all = []
+	
+	for _i in dict.ahnentafel.kind.keys().size():
+		for _j in dict.ahnentafel.kind.keys().size():
+			for _l in dict.ahnentafel.kind.keys().size():
+				var input = {}
+				input.kinds = []
+				input.kinds.append(dict.ahnentafel.kind.keys()[_i])
+				input.kinds.append(dict.ahnentafel.kind.keys()[_j])
+				input.kinds.append(dict.ahnentafel.kind.keys()[_l])
+				var drillinge = Classes_4.Drillinge.new(input)
+				dict.drillinge.all.append(drillinge)
+	
+	var datas = []
+	var ratings = []
+	
+	for key in dict.drillinge.all.front().num.keys():
+		if key != "index":
+			ratings.append(key)
+	
+	for drillinge in dict.drillinge.all:
+		var data = {}
+		data.drillinge = drillinge
+		data.rating = {}
+		
+		for key in ratings:
+			data.rating[key] = -1
+		
+		datas.append(data)
+	
+	
+	for rating in ratings:
+		datas.sort_custom(func(a, b): return a.drillinge.num[rating] > b.drillinge.num[rating])
+		
+		for _i in datas.size():
+			datas[_i].rating[rating] = _i
+	
+	var best_percent = 30
+	var winner_amount = datas.size()*best_percent/100
+	
+	for data in datas:
+		for tag in dict.drillinge.tag:
+			var key = tag.to_lower()
+			var flag = false
+			
+			match tag:
+				"Offense":
+					flag = data.rating[key] < winner_amount
+				"Retention":
+					flag = data.rating[key] < winner_amount
+				"Mobility":
+					flag = data.rating[key] < winner_amount
+				"Expensive":
+					key = "price"
+					
+					flag = data.rating[key] < winner_amount/2
+				"Cheap":
+					key = "price"
+					
+					flag = data.rating[key] >= datas.size()-winner_amount/2
+				"Twin":
+					flag = true
+					
+					for kind in data.drillinge.arr.kind:
+						flag = flag && (kind == data.drillinge.arr.kind.front())
+				"Frontline":
+					flag = true
+					
+					for kind in data.drillinge.arr.kind:
+						var throwability = dict.ahnentafel.kind[kind]["Throwability"]
+						flag = flag && (throwability == 1)
+				"Backline":
+					flag = true
+					
+					for kind in data.drillinge.arr.kind:
+						var throwability = dict.ahnentafel.kind[kind]["Throwability"]
+						flag = flag && (throwability > 1)
+			if flag:
+				data.drillinge.arr.tag.append(tag)
+	#tag 0: 34.2
+	#tag 1: 32.5
+	#tag 2: 11.5
+	#tag 3: 2.7
 
 
 func init_arr() -> void:
@@ -149,8 +236,8 @@ func init_scene() -> void:
 
 
 func _ready() -> void:
-	init_dict()
 	init_num()
+	init_dict()
 	init_arr()
 	init_node()
 	init_flag()

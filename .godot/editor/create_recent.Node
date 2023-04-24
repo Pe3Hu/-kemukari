@@ -1,7 +1,7 @@
+Label
 MarginContainer
 VBoxContainer
 Control
-Label
 ProgressBar
 TextureRect
 GridContainer

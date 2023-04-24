@@ -30,7 +30,8 @@ class Schlachtfeld:
 	var scene = {}
 
 
-	func _init() -> void:
+	func _init(input_) -> void:
+		obj.vorderseite = input_.vorderseite
 		init_scene()
 		init_sektors()
 
@@ -69,14 +70,57 @@ class Schlachtfeld:
 
 #Фронт
 class Vorderseite:
+	var dict = {}
 	var obj = {}
 
 
-	func _init() -> void:
+	func _init(input_) -> void:
+		obj.planet = input_.planet
+		set_mutters(input_.mutters)
 		init_schlachtfeld()
+
+
+	func set_mutters(mutters_) -> void:
+		dict.mutter = {}
+		
+		for mutter in mutters_:
+			dict.mutter[mutter] = ""
+		
+		dict.mutter[mutters_.front()] = "Left"
+		dict.mutter[mutters_.back()] = "Right"
 
 
 	func init_schlachtfeld() -> void:
 		var input = {}
 		input.vorderseite = self
-		obj.schlachtfeld = Classes_0.Schlachtfeld.new(input)
+		obj.schlachtfeld = Classes_2.Schlachtfeld.new(input)
+
+
+#Планета
+class Planet:
+	var arr = {}
+	var obj = {}
+
+
+	func _init() -> void:
+		init_mutters()
+		init_vorderseite()
+
+
+	func init_mutters() -> void:
+		arr.mutter = []
+		var n = 1
+		
+		for _i in n:
+			var input = {}
+			input.planet = self
+			var mutter = Classes_3.Mutter.new(input)
+			arr.mutter.append(mutter)
+
+
+	func init_vorderseite() -> void:
+		var input = {}
+		input.planet = self
+		input.mutters = arr.mutter
+		obj.vorderseite = Classes_2.Vorderseite.new(input)
+
