@@ -37,7 +37,7 @@ class Drillinge:
 		num.offense = 0
 		num.retention = 0
 		num.mobility = 0
-		num.price = 0
+		num.biomass = 0
 		
 		for kind in arr.kind:
 			var ahnentafel = Global.dict.ahnentafel.kind[kind]
@@ -56,10 +56,12 @@ class Angebot:
 
 	func _init(input_) -> void:
 		num.size = 3
+		num.biomass = 0
 		arr.geburtsteich = input_.geburtsteich
 
 
 	func get_new() -> void:
+		num.biomass = 0
 		arr.drillinge = []
 		arr.tag = ["Hodgepodge"]
 		
@@ -86,6 +88,4 @@ class Angebot:
 				drillinge = Global.get_random_element(drillinges)
 			
 			arr.drillinge.append(drillinge)
-		
-		for _i in arr.tag.size():
-			print(arr.tag[_i], arr.drillinge[_i].arr.kind)
+			num.biomass += drillinge.num.biomass

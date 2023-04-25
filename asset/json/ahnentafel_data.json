@@ -21,7 +21,7 @@
   "Max dagame": 13,
   "Offense": 74,
   "Retention": 32,
-  "Price": 100
+  "Biomass": 100
  },
  {
   "Kind": "Bitey",
@@ -45,7 +45,7 @@
   "Max dagame": 11,
   "Offense": 170,
   "Retention": 28,
-  "Price": 217
+  "Biomass": 217
  },
  {
   "Kind": "Crusher",
@@ -69,7 +69,7 @@
   "Max dagame": 40,
   "Offense": 144,
   "Retention": 211,
-  "Price": 379
+  "Biomass": 379
  },
  {
   "Kind": "Fatso",
@@ -93,7 +93,7 @@
   "Max dagame": 24,
   "Offense": 50,
   "Retention": 319,
-  "Price": 383
+  "Biomass": 383
  },
  {
   "Kind": "Sticky ",
@@ -117,7 +117,7 @@
   "Max dagame": 7,
   "Offense": 35,
   "Retention": 393,
-  "Price": 477
+  "Biomass": 477
  },
  {
   "Kind": "Spiky",
@@ -141,7 +141,7 @@
   "Max dagame": 4,
   "Offense": 311,
   "Retention": 239,
-  "Price": 610
+  "Biomass": 610
  },
  {
   "Kind": "Poke",
@@ -165,7 +165,7 @@
   "Max dagame": 32,
   "Offense": 515,
   "Retention": 53,
-  "Price": 641
+  "Biomass": 641
  },
  {
   "Kind": "Mower",
@@ -189,7 +189,7 @@
   "Max dagame": 26,
   "Offense": 440,
   "Retention": 46,
-  "Price": 548
+  "Biomass": 548
  },
  {
   "Kind": "Whistler",
@@ -213,7 +213,7 @@
   "Max dagame": 20,
   "Offense": 256,
   "Retention": 43,
-  "Price": 331
+  "Biomass": 331
  },
  {
   "Kind": "Tosser",
@@ -237,7 +237,7 @@
   "Max dagame": 16,
   "Offense": 396,
   "Retention": 29,
-  "Price": 471
+  "Biomass": 471
  },
  {
   "Kind": "Gobber",
@@ -261,6 +261,6 @@
   "Max dagame": 28,
   "Offense": 310,
   "Retention": 36,
-  "Price": 373
+  "Biomass": 373
  }
 ]

@@ -166,11 +166,11 @@ func set_drillinge() -> void:
 				"Mobility":
 					flag = data.rating[key] < winner_amount
 				"Expensive":
-					key = "price"
+					key = "biomass"
 					
 					flag = data.rating[key] < winner_amount/2
 				"Cheap":
-					key = "price"
+					key = "biomass"
 					
 					flag = data.rating[key] >= datas.size()-winner_amount/2
 				"Twin":

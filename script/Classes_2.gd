@@ -14,7 +14,7 @@ class Sektor:
 		vec.grid = input_.grid
 		obj.schlachtfeld = input_.schlachtfeld
 		obj.nachzucht = null
-		init_scene()
+		#init_scene()
 
 
 	func init_scene() -> void:
@@ -25,12 +25,16 @@ class Sektor:
 
 #Поле боя
 class Schlachtfeld:
+	var num = {}
+	var word = {}
 	var obj = {}
 	var arr = {}
 	var scene = {}
 
 
 	func _init(input_) -> void:
+		num.size = input_.size
+		word.layer = input_.layer
 		obj.vorderseite = input_.vorderseite
 		init_scene()
 		init_sektors()
@@ -44,9 +48,8 @@ class Schlachtfeld:
 	func init_sektors() -> void:
 		arr.sektor = []
 		var n = 4
-		var m = 6
 		var cols = n*2+1
-		var rows = m
+		var rows = num.size
 		scene.myself.columns = cols
 		
 		for _i in rows:
@@ -77,23 +80,46 @@ class Vorderseite:
 	func _init(input_) -> void:
 		obj.planet = input_.planet
 		set_mutters(input_.mutters)
-		init_schlachtfeld()
+		init_schlachtfelds()
 
 
 	func set_mutters(mutters_) -> void:
 		dict.mutter = {}
 		
 		for mutter in mutters_:
-			dict.mutter[mutter] = ""
+			mutter.dict.vorderseite[self] = false
 		
-		dict.mutter[mutters_.front()] = "Left"
-		dict.mutter[mutters_.back()] = "Right"
+		dict.mutter["Left"] = mutters_.front()
+		
+		if mutters_.front() != mutters_.back():
+			dict.mutter["Right"] = mutters_.back()
 
 
-	func init_schlachtfeld() -> void:
-		var input = {}
-		input.vorderseite = self
-		obj.schlachtfeld = Classes_2.Schlachtfeld.new(input)
+	func init_schlachtfelds() -> void:
+		dict.schlachtfeld = {}
+		var sizes = [5,7,5]
+		
+		for _i in sizes.size():
+			var input = {}
+			input.vorderseite = self
+			input.size = sizes[_i]
+			input.layer = ""
+			
+			match _i:
+				0:
+					input.layer = "Top"
+				1:
+					input.layer = "Mid"
+				2:
+					input.layer = "Bot"
+			
+			var schlachtfeld = Classes_2.Schlachtfeld.new(input)
+			dict.schlachtfeld[input.layer] = schlachtfeld
+
+
+	func battle_preparation() -> void:
+		for side in dict.mutter.keys():
+			dict.mutter[side].battle_preparation(self)
 
 
 #Планета
