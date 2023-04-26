@@ -1,8 +1,10 @@
 res://scene/game/Game.tscn
+res://script/Classes_3.gd
 res://scene/2/schlachtfeld/Schlachtfeld.tscn
 res://scene/2/sektor/Sektor.tscn
 res://script/Classes_2.gd
-res://script/Classes_3.gd
-res://scene/game/Game.gd
-res://script/Classes_4.gd
 res://script/Global.gd
+res://scene/game/Game.gd
+res://scene/2/vorderseite/Vorderseite.tscn
+res://script/Classes_4.gd
+res://scene/2/sektor/Sektor.gd

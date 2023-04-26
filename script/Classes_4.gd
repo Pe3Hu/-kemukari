@@ -3,20 +3,57 @@ extends Node
 
 #Родословная
 class Ahnentafel:
-	var obj = {}
-
-
-	func _init() -> void:
-		pass
-
-
-#Потомство
-class Nachzucht:
+	var num = {}
 	var obj = {}
 
 
 	func _init(input_) -> void:
+		obj.nachzucht = input_.nachzucht
+		num.parameter = Global.dict.ahnentafel.kind[obj.nachzucht.word.kind]
+
+
+#Потомство
+class Nachzucht:
+	var num = {}
+	var vec = {}
+	var word = {}
+	var obj = {}
+
+
+	func _init(input_) -> void:
+		word.layer = input_.layer
+		word.kind = input_.kind
+		word.side = null
 		obj.mutter = input_.mutter
+		obj.vorderseite = input_.vorderseite
+		obj.sektor = null
+		var input = {}
+		input.nachzucht = self
+		obj.ahnentafel = Classes_4.Ahnentafel.new(input)
+		set_march()
+
+
+	func set_march() -> void:
+		var schlachtfeld = obj.vorderseite.dict.schlachtfeld[word.layer]
+		num.march = {}
+		num.march.current = 0
+		num.march.max = Global.arr.defense_line[schlachtfeld.num.defense_line]
+		
+		if word.side == null:
+			for key in obj.vorderseite.dict.mutter.keys():
+				if obj.vorderseite .dict.mutter[key] == obj.mutter:
+					word.side = key
+		
+		if word.side == "Second":
+			num.march.max = Global.arr.march.back() - num.march.max
+
+
+	func set_sektor(sektor_) -> void:
+		#var sektor = obj.vorderseite.dict.schlachtfeld[word.layer].get_sektor(vec.grid)
+		#print(sektor.parent.vec.grid)
+		obj.sektor = sektor_
+		sektor_.obj.nachzucht = self
+		sektor_.scene.myself.update_status()
 
 
 #Тройняшки

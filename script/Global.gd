@@ -46,6 +46,12 @@ func init_dict() -> void:
 		Vector3( 0, 0,  1),
 		Vector3(-1, 0,  0)
 	]
+	dict.neighbor.linear2 = [
+		Vector2( 0,-1),
+		Vector2( 1, 0),
+		Vector2( 0, 1),
+		Vector2(-1, 0)
+	]
 	dict.neighbor.diagonal = [
 		Vector2( 1,-1),
 		Vector2( 1, 1),
@@ -208,6 +214,9 @@ func init_arr() -> void:
 	arr.color = ["Red","Green","Blue","Yellow"]
 	arr.delta = [3,4,5,6,7,8,9]#[2,3,4,5,6,7,8,9,10]
 	arr.bereich = ["deck","discard","hand","exile"]
+	arr.layer = ["Top","Mid","Bot"]
+	arr.side = ["First","Second"]
+	arr.defense_line = [0,100,300,600,1000,1400,1700,1900,2000]
 
 
 func init_node() -> void:
@@ -233,6 +242,7 @@ func init_scene() -> void:
 	scene.leinwand = load("res://scene/1/leinwand/Leinwand.tscn")
 	scene.sektor = load("res://scene/2/sektor/Sektor.tscn")
 	scene.schlachtfeld = load("res://scene/2/schlachtfeld/Schlachtfeld.tscn")
+	scene.vorderseite = load("res://scene/2/vorderseite/Vorderseite.tscn")
 
 
 func _ready() -> void:

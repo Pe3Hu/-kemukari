@@ -1,5 +1,5 @@
 2a60927148abd1d33b818b535e306557
-::res://::1682426661
+::res://::1682501225
 icon.png::CompressedTexture2D::2432420761471245026::1676094585::1682073341::1::::<><>::
 icon.svg::CompressedTexture2D::9162371498834860976::1679058444::1682073341::1::::<><>::
 README.md::TextFile::-1::1682165399::0::1::::<><>::
@@ -20,7 +20,7 @@ rimouski sb.otf::FontFile::2683584631797712805::1657615528::1682151714::1::::<><
 Sabandija-font-ffp.ttf::FontFile::9201959610161765482::1673874020::1682073340::1::::<><>::
 vinque rg.otf::FontFile::4667643456426473135::1570966408::1682151714::1::::<><>::
 ::res://asset/json/::1682234776
-ahnentafel_data.json::JSON::-1::1682234767::0::1::::<><>::
+ahnentafel_data.json::JSON::-1::1682431539::0::1::::<><>::
 emblem_path.json::JSON::-1::1680951373::0::1::::<><>::
 emblem_path_original.json::JSON::-1::1680950137::0::1::::<><>::
 nachzucht_data.json::JSON::-1::1682160889::0::1::::<><>::
@@ -158,18 +158,18 @@ Schlitz.tscn::PackedScene::3656140440891968075::1679522569::0::1::::<><>::
 ::res://scene/1/zugang/::1682068425
 Zugang.tscn::PackedScene::3744632652294610740::1679523185::0::1::::<><>::
 ::res://scene/2/::1682149660
-::res://scene/2/schlachtfeld/::1682352559
-Schlachtfeld.tscn::PackedScene::631334879529220583::1682352559::0::1::::<><>::
-::res://scene/2/sektor/::1682352559
+::res://scene/2/schlachtfeld/::1682433529
+Schlachtfeld.tscn::PackedScene::631334879529220583::1682433529::0::1::::<><>::
+::res://scene/2/sektor/::1682434115
 Sektor.gd::GDScript::-1::1682159497::0::1::::<>MarginContainer<>::
-Sektor.tscn::PackedScene::4116155937087187421::1682352559::0::1::::<><>::uid://0eg48sxacplr<>res://scene/2/sektor/Sektor.gd<>uid://brthmdy0bvgqo
-::res://scene/game/::1682352558
-Game.gd::GDScript::-1::1682345666::0::1::::<>Node<>::
-Game.tscn::PackedScene::8246655032211948728::1682352558::0::1::::<><>::res://scene/game/Game.gd
-::res://script/::1682352558
+Sektor.tscn::PackedScene::4116155937087187421::1682434115::0::1::::<><>::uid://0eg48sxacplr<>res://scene/2/sektor/Sektor.gd<>uid://brthmdy0bvgqo
+::res://scene/game/::1682433528
+Game.gd::GDScript::-1::1682428747::0::1::::<>Node<>::
+Game.tscn::PackedScene::8246655032211948728::1682433528::0::1::::<><>::res://scene/game/Game.gd
+::res://script/::1682434115
 Classes_0.gd::GDScript::-1::1682150559::0::1::::<>Node<>::
 Classes_1.gd::GDScript::-1::1682072321::0::1::::<>Node<>::
-Classes_2.gd::GDScript::-1::1682345900::0::1::::<>Node<>::
-Classes_3.gd::GDScript::-1::1682352512::0::1::::<>Node<>::
-Classes_4.gd::GDScript::-1::1682352558::0::1::::<>Node<>::
-Global.gd::GDScript::-1::1682351915::0::1::::<>Node<>::
+Classes_2.gd::GDScript::-1::1682428832::0::1::::<>Node<>::
+Classes_3.gd::GDScript::-1::1682434115::0::1::::<>Node<>::
+Classes_4.gd::GDScript::-1::1682431568::0::1::::<>Node<>::
+Global.gd::GDScript::-1::1682431215::0::1::::<>Node<>::
