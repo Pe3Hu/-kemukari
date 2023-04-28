@@ -16,12 +16,6 @@ func _ready() -> void:
 
 
 func _input(event) -> void:
-	if event is InputEventMouseButton:
-		Global.mouse_pressed = !Global.mouse_pressed
-	else:
-		Global.mouse_pressed = !Global.mouse_pressed
-		
-		
 	if event is InputEventKey:
 		match event.keycode:
 			KEY_A:
@@ -29,8 +23,9 @@ func _input(event) -> void:
 			KEY_D:
 				Global.obj.planet.obj.vorderseite.select_next_schlachtfeld(1)
 			KEY_SPACE:
-				Global.obj.planet.obj.vorderseite.next_turn()
-
+				if event.is_pressed() && !event.is_echo():
+					#Global.obj.planet.obj.vorderseite.next_turn()
+					Global.obj.austausch.next_round()
 
 func _process(delta_) -> void:
 	$FPS.text = str(Engine.get_frames_per_second())

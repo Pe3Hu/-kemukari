@@ -1,0 +1,43 @@
+[gd_scene load_steps=4 format=3 uid="uid://1acvf1d6n0rm"]
+
+[ext_resource type="Texture2D" uid="uid://0eg48sxacplr" path="res://asset/png/sektor/empty.png" id="1_o0jw0"]
+[ext_resource type="FontFile" uid="uid://dk3ytja0i6utv" path="res://asset/font/ELEPHNT.TTF" id="2_5nfr7"]
+[ext_resource type="LabelSettings" uid="uid://dwi3jqaqpjep8" path="res://asset/font/basic_label_setting.tres" id="3_dpc3y"]
+
+[node name="Auktionslos" type="MarginContainer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -30.0
+offset_top = -30.0
+offset_right = 30.0
+offset_bottom = 30.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="BG" type="TextureRect" parent="."]
+layout_mode = 2
+texture = ExtResource("1_o0jw0")
+
+[node name="Labels" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Name" type="Label" parent="Labels"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_5nfr7")
+text = "Name"
+label_settings = ExtResource("3_dpc3y")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Value" type="Label" parent="Labels"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_5nfr7")
+text = "Value
+"
+horizontal_alignment = 1
+vertical_alignment = 1

@@ -1,8 +1,8 @@
-HBoxContainer
 Label
-MarginContainer
 VBoxContainer
-Control
-ProgressBar
-TextureRect
+HBoxContainer
+MarginContainer
 GridContainer
+Control
+TextureRect
+ProgressBar

@@ -11,8 +11,6 @@ var flag = {}
 var vec = {}
 var scene = {}
 
-var mouse_pressed = false
-
 
 func init_num() -> void:
 	num.index = {}
@@ -243,6 +241,10 @@ func init_scene() -> void:
 	scene.sektor = load("res://scene/2/sektor/Sektor.tscn")
 	scene.schlachtfeld = load("res://scene/2/schlachtfeld/Schlachtfeld.tscn")
 	scene.vorderseite = load("res://scene/2/vorderseite/Vorderseite.tscn")
+	scene.bieter = load("res://scene/5/bieter/Bieter.tscn")
+	scene.auktionslos = load("res://scene/5/auktionslos/Auktionslos.tscn")
+	scene.versteigerung = load("res://scene/5/versteigerung/Versteigerung.tscn")
+	scene.austausch = load("res://scene/5/austausch/Austausch.tscn")
 
 
 func _ready() -> void:

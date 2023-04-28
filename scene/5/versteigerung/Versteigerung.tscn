@@ -1,0 +1,35 @@
+[gd_scene load_steps=3 format=3 uid="uid://t6novr1gw0ad"]
+
+[ext_resource type="LabelSettings" uid="uid://dwi3jqaqpjep8" path="res://asset/font/basic_label_setting.tres" id="1_4ocgu"]
+[ext_resource type="Script" path="res://scene/5/versteigerung/Versteigerung.gd" id="1_50dby"]
+
+[node name="Versteigerung" type="VBoxContainer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -62.0
+offset_top = -43.5
+offset_right = 62.0
+offset_bottom = 43.5
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_50dby")
+
+[node name="House" type="Label" parent="."]
+layout_mode = 2
+text = "House"
+label_settings = ExtResource("1_4ocgu")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Round" type="Label" parent="."]
+layout_mode = 2
+text = "Round"
+label_settings = ExtResource("1_4ocgu")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Versteigerung" type="VBoxContainer" parent="."]
+layout_mode = 2

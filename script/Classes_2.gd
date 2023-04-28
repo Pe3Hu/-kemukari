@@ -184,7 +184,7 @@ class Vorderseite:
 
 	func init_scene() -> void:
 		scene.myself = Global.scene.vorderseite.instantiate()
-		Global.node.game.get_node("Layer2").add_child(scene.myself)
+		#Global.node.game.get_node("Layer2").add_child(scene.myself)
 
 
 	func set_mutters(mutters_) -> void:
