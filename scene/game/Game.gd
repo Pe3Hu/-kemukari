@@ -5,7 +5,8 @@ func _ready() -> void:
 	#Global.obj.kasino = Classes_0.Kasino.new()
 	Global.obj.leinwand = Classes_1.Leinwand.new()
 	Global.obj.planet = Classes_2.Planet.new()
-	Global.obj.planet.obj.vorderseite.battle_preparation()
+	Global.obj.austausch = Classes_5.Austausch.new()
+	#Global.obj.planet.obj.vorderseite.battle_preparation()
 	
 		
 	for _i in 10000:
