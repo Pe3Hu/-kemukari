@@ -80,6 +80,8 @@ func init_dict() -> void:
 	init_ahnentafel()
 	init_nachzucht()
 	set_drillinge()
+	init_volkswirt()
+	init_dynastie()
 
 
 func init_ahnentafel() -> void:
@@ -202,6 +204,42 @@ func set_drillinge() -> void:
 	#tag 3: 2.7
 
 
+func init_volkswirt() -> void:
+	dict.volkswirt = {}
+	var path = "res://asset/json/volkswirt_data.json"
+	var array = load_data(path)
+	dict.volkswirt.sin = {}
+	dict.volkswirt.parameter = []
+	
+	for volkswirt in array:
+		var data = {}
+
+		for key in volkswirt.keys():
+			if key != "Sin" && volkswirt[key] > 0:
+				data[key] = volkswirt[key]
+				
+				if !dict.volkswirt.parameter.has(key):
+					dict.volkswirt.parameter.append(key)
+		
+		dict.volkswirt.sin[volkswirt["Sin"]] = data
+
+
+func init_dynastie() -> void:
+	dict.dynastie = {}
+	var path = "res://asset/json/dynastie_data.json"
+	var array = load_data(path)
+	dict.dynastie.house = {}
+	
+	for dynastie in array:
+		var data = {}
+
+		for key in dynastie.keys():
+			if key != "House":
+				data[key] = dynastie[key]
+		
+		dict.dynastie.house[dynastie["House"]] = data
+
+
 func init_arr() -> void:
 	arr.sequence = {} 
 	arr.sequence["A000040"] = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29]
@@ -215,6 +253,7 @@ func init_arr() -> void:
 	arr.layer = ["Top","Mid","Bot"]
 	arr.side = ["First","Second"]
 	arr.defense_line = [0,100,300,600,1000,1400,1700,1900,2000]
+	arr.opinion = ["impersonal","personal"]
 
 
 func init_node() -> void:
@@ -255,6 +294,15 @@ func _ready() -> void:
 	init_flag()
 	init_vec()
 	init_scene()
+	
+	var test = {}
+	test["a"] = 20
+	test["b"] = 30
+	test["c"] = 50
+	test["d"] = 100
+	
+	#var res = from_weight_to_percentage(test)
+	#print(res)
 
 
 func get_random_element(arr_: Array):
@@ -297,3 +345,62 @@ func get_manhattan_distance(a_: Vector3, b_: Vector3) -> int:
 	d += abs(a_.y-b_.y)
 	d += abs(a_.z-b_.z)
 	return d
+
+
+func get_random_key(dict_: Dictionary):
+	if dict_.keys().size() == 0:
+		print("!bug! empty array in get_random_key func")
+		return null
+	
+	var total = 0
+	
+	for key in dict_.keys():
+		total += dict_[key]
+	
+	rng.randomize()
+	var index_r = rng.randf_range(0, 1)
+	var index = 0
+	
+	for key in dict_.keys():
+		var weight = float(dict_[key])
+		index += weight/total
+		
+		if index > index_r:
+			return key
+	
+	print("!bug! index_r error in get_random_key func")
+	return null
+
+
+func reverse_weights(dict_: Dictionary) -> Dictionary:
+	var result = {}
+	var total = 0
+	
+	for key in dict_.keys():
+		total += dict_[key]
+	
+	for key in dict_.keys():
+		result[key] = total-dict_[key]
+	
+	total = 0
+	
+	for key in result.keys():
+		total += result[key]
+	
+	for key in result.keys():
+		result[key] = round(float(result[key])/total*100)
+	
+	return result
+
+
+func from_weight_to_percentage(dict_: Dictionary) -> Dictionary:
+	var result = {}
+	var total = 0
+	
+	for key in dict_.keys():
+		total += dict_[key]
+	
+	for key in dict_.keys():
+		result[key] = round(float(dict_[key])/total*100)
+	
+	return result

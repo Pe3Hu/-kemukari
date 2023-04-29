@@ -1,0 +1,72 @@
+[
+ {
+  "House": "Romanov",
+  "attack": 1,
+  "defense": 8,
+  "gold": 5,
+  "aether": 1,
+  "quantity": 1,
+  "quality": 1,
+  "chaos": 3
+ },
+ {
+  "House": "Tudor",
+  "attack": 1,
+  "defense": 3,
+  "gold": 1,
+  "aether": 5,
+  "quantity": 1,
+  "quality": 8,
+  "chaos": 1
+ },
+ {
+  "House": "Bourbon",
+  "attack": 1,
+  "defense": 1,
+  "gold": 1,
+  "aether": 8,
+  "quantity": 3,
+  "quality": 1,
+  "chaos": 5
+ },
+ {
+  "House": "Habsburg",
+  "attack": 3,
+  "defense": 1,
+  "gold": 8,
+  "aether": 1,
+  "quantity": 5,
+  "quality": 1,
+  "chaos": 1
+ },
+ {
+  "House": "Yamato",
+  "attack": 8,
+  "defense": 1,
+  "gold": 1,
+  "aether": 3,
+  "quantity": 1,
+  "quality": 5,
+  "chaos": 1
+ },
+ {
+  "House": "Ming",
+  "attack": 1,
+  "defense": 5,
+  "gold": 1,
+  "aether": 1,
+  "quantity": 8,
+  "quality": 3,
+  "chaos": 1
+ },
+ {
+  "House": "Osman",
+  "attack": 5,
+  "defense": 1,
+  "gold": 3,
+  "aether": 1,
+  "quantity": 1,
+  "quality": 1,
+  "chaos": 8
+ }
+]

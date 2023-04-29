@@ -1,9 +1,9 @@
 extends Node
 
 
-
 #Династия
 class Dynastie:
+	var num = {}
 	var word = {}
 	var obj = {}
 
@@ -11,130 +11,59 @@ class Dynastie:
 	func _init(input_) -> void:
 		word.house = input_.house
 		obj.austausch = input_.austausch
+		num.parameter = Global.dict.dynastie.house[word.house]
 
 
-#Ставка
-class Bewertung:
+	func get_parameters_for_lots(size_) -> Array:
+		var parameters = []
+		var options = []
+		
+		for key in num.parameter.keys():
+			for _j in num.parameter[key]:
+				options.append(key)
+		
+		for _i in size_:
+			options.shuffle()
+			var parameter = Global.get_random_element(options)
+			parameters.append(parameter)
+		
+		return parameters
+
+
+#Сокровище
+class Kostbarkeiten:
 	var num = {}
-	var obj = {}
-
-
-	func _init(input_) -> void:
-		obj.bieter = input_.bieter
-
-
-#Сокровищница
-class Schatzamt:
-	var num = {}
-	var obj = {}
-
-
-	func _init(input_) -> void:
-		obj.bieter = input_.bieter
-		init_gold(input_.gold)
-		init_aether()
-
-
-	func init_gold(gold_) -> void:
-		num.gold = {}
-		num.gold.max = gold_
-		num.gold.current = num.gold.max
-
-
-	func init_aether() -> void:
-		num.aether = {}
-		num.aether.stage = -1
-		num.aether.harvesting = 1
-		next_aether_phase()
-
-
-	func next_aether_phase() -> void:
-		num.aether.stage += 1
-		num.aether.current = 0
-		num.aether.max = pow((num.aether.stage+10),2)
-		num.aether.total = num.aether.current
-
-
-#Экономист
-class Volkswirt:
-	var obj = {}
-
-
-	func _init(input_) -> void:
-		obj.bieter = input_.bieter
-
-
-#Дипломат
-class Diplomat:
-	var obj = {}
-
-
-	func _init(input_) -> void:
-		obj.bieter = input_.bieter
-
-
-#Участник торгов
-class Bieter:
 	var word = {}
 	var obj = {}
-	var scene = {}
 
 
 	func _init(input_) -> void:
-		word.callsign = input_.callsign
-		obj.versteigerung = null
-		obj.austausch = input_.austausch
-		init_schatzamt(input_.gold)
-		init_volkswirt()
-		init_bewertung()
-		init_diplomat()
-		init_scene()
+		word.type = input_.type
+		num.stack = input_.stack
 
-
-	func init_scene() -> void:
-		scene.myself = Global.scene.bieter.instantiate()
-		scene.myself.set_parent(self)
-
-
-	func init_schatzamt(gold_) -> void:
-		var input = {}
-		input.gold = gold_
-		input.bieter = self
-		obj.schatzamt = Classes_5.Schatzamt.new(input)
-
-
-	func init_volkswirt() -> void:
-		var input = {}
-		input.bieter = self
-		obj.volkswirt = Classes_5.Volkswirt.new(input)
-
-
-	func init_bewertung() -> void:
-		var input = {}
-		input.bieter = self
-		obj.bewertung = Classes_5.Bewertung.new(input)
-
-
-	func init_diplomat() -> void:
-		var input = {}
-		input.bieter = self
-		obj.diplomat = Classes_5.Diplomat.new(input)
 
 
 #Лот аукциона
 class Auktionslos:
+	var word = {}
+	var num = {}
+	var arr = {}
 	var obj = {}
 	var scene = {}
 
 
 	func _init(input_) -> void:
 		obj.versteigerung = input_.versteigerung
+		word.type = input_.type
+		num.stack = input_.stack
+		arr.bieter = []
 		init_scene()
 
 
 	func init_scene() -> void:
 		scene.myself = Global.scene.auktionslos.instantiate()
 		obj.versteigerung.scene.myself.get_node("Versteigerung").add_child(scene.myself)
+		scene.myself.set_parent(self)
 
 
 #Аукцион
@@ -142,13 +71,14 @@ class Versteigerung:
 	var num = {}
 	var word = {}
 	var arr = {}
+	var dict = {}
 	var obj = {}
 	var scene = {}
 
 
 	func _init(input_) -> void:
 		word.type = input_.type
-		word.house = input_.house
+		obj.dynastie = input_.dynastie
 		num.lot = input_.lot
 		num.round = {}
 		num.round.current = 0
@@ -156,6 +86,7 @@ class Versteigerung:
 		num.step = input_.step
 		num.price = input_.price
 		obj.austausch = input_.austausch
+		arr.bieter = []
 		init_scene()
 		init_auktionsloss()
 
@@ -167,17 +98,43 @@ class Versteigerung:
 
 
 	func init_auktionsloss() -> void:
+		var min_stack = 50
+		var max_stack = 150
 		arr.auktionslos = []
+		var types = []
+		var parameters = obj.dynastie.get_parameters_for_lots(num.lot)
 		
 		for _i in num.lot:
 			var input = {}
 			input.versteigerung = self
+			#var parameter = Global.get_random_element(Global.dict.volkswirt.parameter)
+			input.type = parameters[_i]+" dust"
+			Global.rng.randomize()
+			input.stack = round(Global.rng.randf_range(min_stack, max_stack))
 			var auktionslos = Classes_5.Auktionslos.new(input)
 			arr.auktionslos.append(auktionslos)
+		
+		set_impersonal_assessment()
+
+
+	func set_impersonal_assessment() -> void:
+		dict.impersonal_assessment = {}
+		
+		for auktionslos in arr.auktionslos:
+			var parameter = auktionslos.word.type.split(" ")[0]
+			var dynastie = auktionslos.obj.versteigerung.obj.dynastie
+			var weight = auktionslos.num.stack
+			
+			dict.impersonal_assessment[auktionslos] = dynastie.num.parameter[parameter]*weight
+		
+		if word.type == "min":
+			dict.impersonal_assessment = Global.reverse_weights(dict.impersonal_assessment)
+		
+		dict.impersonal_assessment = Global.from_weight_to_percentage(dict.impersonal_assessment)
 
 
 	func payouts() -> void:
-		print("payouts ",word.house)
+		print("payouts ",obj.dynastie.word.house)
 		obj.austausch.scene.myself.get_node("Versteigerungs").remove_child(scene.myself)
 
 
@@ -215,6 +172,7 @@ class Austausch:
 		arr.bieter = []
 		
 		var gold = 1000
+		n = 1000
 		
 		for _i in n:
 			var input = {}
@@ -223,7 +181,7 @@ class Austausch:
 			arr.callsign.shuffle()
 			input.callsign = Global.get_random_element(arr.callsign)
 			arr.callsign.erase(input.callsign)
-			var bieter = Classes_5.Bieter.new(input)
+			var bieter = Classes_6.Bieter.new(input)
 			arr.bieter.append(bieter)
 		
 		sort_bieters()
@@ -246,8 +204,8 @@ class Austausch:
 	func init_dynasties() -> void:
 		dict.dynastie = {}
 		#var owners = ["Alexander","Caesar","Temujin","Elizabeth","Karl"]
-		#England France Spain Japan Turkey China German Russia
-		var houses = ["Tudor","Bourbon","Habsburg","Yamato","Osman","Ming","Oldenburg","Romanov"]
+		#England France Spain Japan Turkey China Russia German
+		var houses = ["Tudor","Bourbon","Habsburg","Yamato","Osman","Ming","Romanov"]#"Oldenburg"
 		
 		for house in houses:
 			var input = {}
@@ -259,7 +217,7 @@ class Austausch:
 
 	func init_versteigerungs() -> void:
 		arr.versteigerung = []
-		var types = ["min","min","max"]
+		var types = ["min","min","min"]
 		var lots = [3,3,3]
 		var rounds = [2,3,2]
 		var steps = [1,2,3]
@@ -275,10 +233,21 @@ class Austausch:
 			input.price = prices[_i]
 			input.austausch = self
 			houses.shuffle()
-			input.house = Global.get_random_element(houses)
-			houses.erase(input.house)
+			var house = Global.get_random_element(houses)
+			houses.erase(house)
+			input.dynastie = dict.dynastie[house]
 			var versteigerung = Classes_5.Versteigerung.new(input)
 			arr.versteigerung.append(versteigerung)
+		
+		fill_versteigerungs()
+
+
+	func fill_versteigerungs() -> void:
+		for bieter in arr.bieter:
+			bieter.obj.volkswirt.select_versteigerung()
+		
+		for versteigerung in arr.versteigerung:
+			versteigerung.scene.myself.update_members()
 
 
 	func next_round() -> void:
