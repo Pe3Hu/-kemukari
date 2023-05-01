@@ -53,6 +53,7 @@ class Volkswirt:
 		obj.bieter = input_.bieter
 		init_sins()
 		prioritize()
+		set_risk()
 		init_common_sense()
 
 
@@ -87,6 +88,27 @@ class Volkswirt:
 					dict.priority[parameter] += Global.dict.volkswirt.sin[sin][parameter]*dict.sin[sin]
 			
 			dict.priority[parameter] = round(dict.priority[parameter])
+
+
+	func set_risk() -> void:
+		dict.risk = {}
+		var n = 10
+		var step = 10
+		var total = 100
+		var weights = []
+		
+		for _i in n:
+			Global.rng.randomize()
+			var weight = Global.rng.randi_range(0, total/3)
+			total -= weight
+			weights.append(weight)
+		
+		for _i in n:
+			var percent = step*_i
+			dict.risk[percent] = weights[_i]
+			
+			if _i > 0:
+				dict.risk[percent] += dict.risk[percent-step]
 
 
 	func init_common_sense() -> void:
@@ -130,7 +152,7 @@ class Volkswirt:
 
 
 	func select_auktionslos() -> void:
-		if obj.bieter.obj.auktionslos == null:
+		if obj.bieter.obj.auktionslos == null && wait_next_round():
 			var assessment = {}
 			assessment.personal = get_personal_assessment()
 			assessment.impersonal = obj.bieter.obj.versteigerung.dict.impersonal_assessment
@@ -144,6 +166,29 @@ class Volkswirt:
 			
 			obj.bieter.obj.auktionslos = Global.get_random_key(weights)
 			obj.bieter.obj.auktionslos.arr.bieter.append(obj.bieter)
+			obj.bieter.obj.versteigerung.num.bieter.decided += 1
+			auktionslos_payment()
+
+
+	func wait_next_round() -> bool:
+		if obj.bieter.obj.versteigerung == null:
+			return false
+		
+		var versteigerung = obj.bieter.obj.versteigerung
+		var wait = versteigerung.num.round.current == versteigerung.num.round.max
+		
+		if wait:
+			return wait
+		
+		for percent in dict.risk.keys():
+			if percent >= versteigerung.num.bieter.percentage_of_undecideds:
+				var options = {}
+				options[true] = dict.risk[percent]
+				options[false] = 100-dict.risk[percent]
+				wait = Global.get_random_key(options)
+				return wait
+		
+		return wait
 
 
 	func get_personal_assessment() -> Dictionary:
@@ -155,6 +200,16 @@ class Volkswirt:
 		
 		personal_assessment = Global.from_weight_to_percentage(personal_assessment)
 		return personal_assessment
+
+
+	func auktionslos_payment() -> void:
+		var versteigerung = obj.bieter.obj.versteigerung
+		var price = versteigerung.arr.price[versteigerung.num.round.current]
+		obj.bieter.obj.schatzamt.num.gold.current -= price
+		versteigerung.obj.dynastie.num.gold.current += price
+		obj.bieter.scene.myself.update_nums()
+		obj.bieter.obj.versteigerung = null
+		obj.bieter.obj.auktionslos = null
 
 
 #Воитель

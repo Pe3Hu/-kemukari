@@ -9,9 +9,16 @@ class Dynastie:
 
 
 	func _init(input_) -> void:
+		init_gold(0)
 		word.house = input_.house
 		obj.austausch = input_.austausch
 		num.parameter = Global.dict.dynastie.house[word.house]
+
+
+	func init_gold(gold_) -> void:
+		num.gold = {}
+		num.gold.max = gold_
+		num.gold.current = num.gold.max
 
 
 	func get_parameters_for_lots(size_) -> Array:
@@ -40,7 +47,6 @@ class Kostbarkeiten:
 	func _init(input_) -> void:
 		word.type = input_.type
 		num.stack = input_.stack
-
 
 
 #Лот аукциона
@@ -85,10 +91,14 @@ class Versteigerung:
 		num.round.max = input_.round
 		num.step = input_.step
 		num.price = input_.price
+		num.bieter = {}
+		num.bieter.total = 0
+		num.bieter.decided = 0
 		obj.austausch = input_.austausch
 		arr.bieter = []
 		init_scene()
 		init_auktionsloss()
+		set_entry_fee()
 
 
 	func init_scene() -> void:
@@ -131,6 +141,11 @@ class Versteigerung:
 			dict.impersonal_assessment = Global.reverse_weights(dict.impersonal_assessment)
 		
 		dict.impersonal_assessment = Global.from_weight_to_percentage(dict.impersonal_assessment)
+
+
+	func set_entry_fee() -> void:
+		arr.entry_fee = [10,0,10,20]
+		arr.price = [10,10,20,40]
 
 
 	func payouts() -> void:
@@ -188,7 +203,8 @@ class Austausch:
 
 
 	func sort_bieters() -> void:
-		arr.bieter.sort_custom(func(a, b): return a.obj.schatzamt.num.aether.total > b.obj.schatzamt.num.aether.total)
+		arr.bieter.sort_custom(func(a, b): return a.obj.schatzamt.num.gold.current > b.obj.schatzamt.num.gold.current)
+		#arr.bieter.sort_custom(func(a, b): return a.obj.schatzamt.num.aether.total > b.obj.schatzamt.num.aether.total)
 		var node = scene.myself.get_node("Bieters")
 		
 		var top = 10
@@ -248,9 +264,15 @@ class Austausch:
 		
 		for versteigerung in arr.versteigerung:
 			versteigerung.scene.myself.update_members()
+			versteigerung.num.bieter.total = versteigerung.arr.bieter.size()
 
 
 	func next_round() -> void:
 		for versteigerung in arr.versteigerung:
+			versteigerung.num.bieter.percentage_of_undecideds = float(versteigerung.num.bieter.decided)/versteigerung.num.bieter.total
 			versteigerung.scene.myself.next_round()
+			sort_bieters()
+		
+		if scene.myself.get_node("Versteigerungs").get_child_count() == 0:
+			init_versteigerungs()
 

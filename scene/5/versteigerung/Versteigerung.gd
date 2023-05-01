@@ -8,10 +8,11 @@ func set_parent(parent_) -> void:
 	parent = parent_
 	$House.text = parent.obj.dynastie.word.house
 	$Round.text = "Round " + str(parent.num.round.current)
+	$Members.text = "Members: " + str(parent.arr.bieter.size())
 
 
 func update_members() -> void:
-	$Members.text = "Members: " + str(parent.arr.bieter.size())
+	$Members.text = "Members: " + str(parent.num.bieter.total-parent.num.bieter.decided)
 
 
 func next_round() -> void:
@@ -24,6 +25,8 @@ func next_round() -> void:
 		
 		for auktionslos in parent.arr.auktionslos:
 			auktionslos.scene.myself.update_members()
+		
+		update_members()
 		
 		if parent.num.round.current > parent.num.round.max:
 			parent.payouts()
